@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Put index.html in www
+        run: |
+          mkdir -p www
+          if [ ! -f www/index.html ]; then cp "$(find . -name index.html -not -path './node_modules/*' | head -n 1)" www/index.html; fi
       - uses: actions/setup-node@v4
         with:
           node-version: 20
